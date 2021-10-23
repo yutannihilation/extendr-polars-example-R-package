@@ -1,0 +1,67 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# An example R package to use [Polars](https://github.com/pola-rs/polars) via [extendr](https://extendr.github.io/)
+
+**This repository is just for a quick proof of concept**
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+## Installation
+
+You can install the development version of polarsr from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("yutannihilation/extendr-polars-example-R-package")
+```
+
+## Example
+
+### `Series`
+
+```{r example_series}
+library(polarsr)
+
+x <- as_int32chunked(1:10, "foo")
+x
+
+.Internal(inspect(x))
+
+# works
+x[3]
+
+# won't work yet
+x[2:3]
+
+# Do not execute this, this crashes the R session!
+# x[3] <- 3
+```
+
+### `DataFrame`
+
+```{r}
+pdf <- as_polar_dataframe(data.frame(x = 1:10, y = 11:20))
+pdf
+
+# This returns an Altrep
+pdf$column("x")
+.Internal(inspect(pdf$column("x")))
+
+# non-existent column
+pdf$column("foo")
+```
+

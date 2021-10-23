@@ -81,10 +81,10 @@ fn as_int32chunked(x: Integers, name: &str) -> Robj {
 
 /// @export
 #[extendr(use_try_from = true)]
-fn as_polar_dataframe(x: List) -> PolarsrDataFrame {
+fn as_polar_dataframe(x: List) -> Robj {
     // If x is not a data.frame, return NULL
     if !x.is_frame() {
-        panic!("Not a data.frame!");
+        return NULL.into();
     }
 
     let df: DataFrame = x
@@ -98,7 +98,7 @@ fn as_polar_dataframe(x: List) -> PolarsrDataFrame {
         })
         .collect();
 
-    PolarsrDataFrame(df)
+    PolarsrDataFrame(df).into()
 }
 
 // Macro to generate exports.
