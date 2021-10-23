@@ -9,5 +9,15 @@
 NULL
 
 #' @export
-as_in32chunked <- function(x) .Call(wrap__as_in32chunked, x)
+as_int32chunked <- function(x, name) .Call(wrap__as_int32chunked, x, name)
+
+#' @export
+as_polar_dataframe <- function(x) .Call(wrap__as_polar_dataframe, x)
+
+PolarsrDataFrame <- new.env(parent = emptyenv())
+
+PolarsrDataFrame$column <- function(name) .Call(wrap__PolarsrDataFrame__column, self, name)
+
+#' @export
+`$.PolarsrDataFrame` <- function (self, name) { func <- PolarsrDataFrame[[name]]; environment(func) <- environment(); func }
 
