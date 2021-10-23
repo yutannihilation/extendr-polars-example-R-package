@@ -1,0 +1,11 @@
+[package]
+name = "polarsr"
+version = "0.0.1"
+edition = "2021"
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
+extendr-api = { git = "https://github.com/extendr/extendr" }
+polars = "0.16.0"
